@@ -31,10 +31,68 @@ var QuizButton1click;
 var QuizButton2click;
 var QuizButton3click;
 var QuizButton4click;
+var QuestionAsked = 0 ;
 
-var quizqa
-// (A) Por
+var quizqa= {
+    // (A) PROPERTIES 
+     // (A1) QUESTIONS & ANSWERS
+     // Q = QUESTION, O = OPTIONS, A = CORRECT ANSWER
+     data: [
+     {
+       q : "Commonly used data types DO NOT include?",
+       o : [
+         "1. strings",
+         "2. booleans",
+         "3. alerts",
+         "4. numbers"
+       ],
+       a : "1. strings"
+     },
+     {
+       q : "The condition in an if/else statment is enclosed within ____",
+       o : [
+        "1. quotes",
+        "2. curly brackets",
+        "3. parentheses",
+        "4. square brackets"
+       ],
+       a :  "3. parentheses"
+     },
+     {
+       q : "Arrays in JavaScript can be used to store  ____.",
+       o : [
+        "1. numbers and strings",
+        "2. other arrays",
+        "3. booleans",
+        "4. all of the above"
+       ],
+       a :  "2. other arrays"
+     },
+     {
+        q : "String values must be enclosed within  ____ when being assigned to variables.",
+        o : [
+         "1. commas",
+         "2. curly brackets",
+         "3. quotes",
+         "4. parentheses"
+       ],
+       a : "4. parentheses"
+     },
+     {
+        q : "A very useful tool used during development and debugging for printing content to the debugger is.",
+        o : [
+         "1. JavaScript",
+         "2. terminal/bash",
+         "3. for loops",
+         "4. console.log"
+       ],
+       a : "3. for loops",
+     }
+     ]
+    }
 
+
+console.log(quizqa.data[0].q)
 
 //EVENT LISTENERS
 
@@ -49,7 +107,7 @@ startButton.addEventListener("click", function (event) {
 // FUNCTION  CALLS
 
 function LoadQuiz(event) {
-  alert(event);
+
   document.getElementById("quizWrapper").innerHTML = "";
 
   var QuizButton1 = document.createElement("BUTTON");
@@ -62,11 +120,25 @@ function LoadQuiz(event) {
   QuizButton3.id = "QuizButton3";
   QuizButton4.id = "QuizButton4";
   //QuizButton1.setAttribute("click",LoadQuiz);
-  p.textContent = "Commmonly used data types DO NOT include:";
-  QuizButton1.textContent = "1.strings";
-  QuizButton2.textContent = "2. booleans";
-  QuizButton3.textContent = "3.Alerts";
-  QuizButton4.textContent = "4. numbers";
+  if(QuestionAsked === 0)
+  {
+    p.textContent = quizqa.data[0].q;
+    QuizButton1.textContent = quizqa.data[0].o[0];
+    QuizButton2.textContent =  quizqa.data[0].o[1];;
+    QuizButton3.textContent =  quizqa.data[0].o[2];;
+    QuizButton4.textContent =  quizqa.data[0].o[3];;
+    QuestionAsked++;
+  }
+  else if(QuestionAsked = "1")
+  {
+    p.textContent = quizqa.data[1].q;
+    QuizButton1.textContent = quizqa.data[1].o[0];
+    QuizButton2.textContent =  quizqa.data[1].o[1];;
+    QuizButton3.textContent =  quizqa.data[1].o[2];;
+    QuizButton4.textContent =  quizqa.data[1].o[3];;
+
+  }
+
   body.appendChild(QuizSection);
   QuizSection.appendChild(p);
   QuizSection.appendChild(QuizButton1);
@@ -86,28 +158,28 @@ function LoadQuiz(event) {
   QuizButton1click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-
+    console.log(QuizButton1click.innerHTML);
     LoadQuiz(2);
   });
 
   QuizButton2click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-
+    console.log(QuizButton2click.innerHTML);
     LoadQuiz(3);
   });
 
   QuizButton3click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-
+    console.log(QuizButton3click.innerHTML);
     LoadQuiz(4);
   });
 
   QuizButton4click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-
+    console.log(QuizButton4click.innerHTML);
     LoadQuiz(5);
   });
 }
