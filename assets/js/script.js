@@ -7,6 +7,8 @@ var QuizSection = document.createElement("section");
 var p = document.createElement("p");
 var startButton = document.createElement("BUTTON");
 
+
+
 h1El.textContent = "Coding Quiz Challenge";
 // Create Quiz Question
 p.textContent =
@@ -92,7 +94,7 @@ var quizqa= {
     }
 
 
-console.log(quizqa.data[0].q)
+console.log(quizqa.data[3])
 
 //EVENT LISTENERS
 
@@ -114,11 +116,20 @@ function LoadQuiz(event,answer) {
   var QuizButton2 = document.createElement("BUTTON");
   var QuizButton3 = document.createElement("BUTTON");
   var QuizButton4 = document.createElement("BUTTON");
+  var submitButton = document.createElement("BUTTON");
+  var enterInitials = document.createElement("input");
+  submitButton.id = "submitButton";
+  enterInitials.id = "enterInitials";
+  enterInitials.placeholder = "Enter initials";
+  
+
 
   QuizButton1.id = "QuizButton1";
   QuizButton2.id = "QuizButton2";
   QuizButton3.id = "QuizButton3";
   QuizButton4.id = "QuizButton4";
+
+
   //QuizButton1.setAttribute("click",LoadQuiz);
   if(QuestionAsked === 0)
   {
@@ -129,7 +140,7 @@ function LoadQuiz(event,answer) {
     QuizButton4.textContent =  quizqa.data[0].o[3];
     
   }
-  else if(QuestionAsked = "1")
+  else if(QuestionAsked === 1)
   {
     p.textContent = quizqa.data[1].q;
     QuizButton1.textContent = quizqa.data[1].o[0];
@@ -139,17 +150,74 @@ function LoadQuiz(event,answer) {
 
   }
 
+  else if(QuestionAsked === 2)
+  {
+    p.textContent = quizqa.data[2].q;
+    QuizButton1.textContent = quizqa.data[2].o[0];
+    QuizButton2.textContent =  quizqa.data[2].o[1];;
+    QuizButton3.textContent =  quizqa.data[2].o[2];;
+    QuizButton4.textContent =  quizqa.data[2].o[3];;
+
+  }
+
+  else if(QuestionAsked === 3 )
+  {
+    console.log(quizqa.data[QuestionAsked])
+    p.textContent = quizqa.data[3].q;
+    QuizButton1.textContent = quizqa.data[3].o[0];
+    QuizButton2.textContent =  quizqa.data[3].o[1];;
+    QuizButton3.textContent =  quizqa.data[3].o[2];;
+    QuizButton4.textContent =  quizqa.data[3].o[3];;
+
+  }
+  
+  
+  else if(QuestionAsked === 4 )
+  {
+    console.log(quizqa.data[QuestionAsked])
+    p.textContent = quizqa.data[4].q;
+    QuizButton1.textContent = quizqa.data[4].o[0];
+    QuizButton2.textContent =  quizqa.data[4].o[1];;
+    QuizButton3.textContent =  quizqa.data[4].o[2];;
+    QuizButton4.textContent =  quizqa.data[4].o[3];;
+
+  }
+
+  if (QuestionAsked < 5) 
+  {
+    body.appendChild(QuizSection);
+    QuizSection.appendChild(p);
+    QuizSection.appendChild(QuizButton1);
+    QuizSection.appendChild(QuizButton2);
+    QuizSection.appendChild(QuizButton3);
+    QuizSection.appendChild(QuizButton4);
+    quizWrapper = document.querySelector("#quizWrapper");
+    QuizButton1click = quizWrapper.querySelector("#QuizButton1");
+    QuizButton2click = quizWrapper.querySelector("#QuizButton2");
+    QuizButton3click = quizWrapper.querySelector("#QuizButton3");
+    QuizButton4click = quizWrapper.querySelector("#QuizButton4");
+
+  }
+  else
+  {
+    //document.getElementById("quizWrapper").innerHTML = "";
+    h1El.textContent = "All done!";
+    SubmitButton = quizWrapper.querySelector("#submitButton")
+    // Create Quiz Question
+    p.textContent = "Your final score is 0.";
+    submitButton.textContent  = "Submit";
+  
+  submitButton.textContent = "Submit Score";
+  enterInitials.textContent = "Initials";
   body.appendChild(QuizSection);
-  QuizSection.appendChild(p);
-  QuizSection.appendChild(QuizButton1);
-  QuizSection.appendChild(QuizButton2);
-  QuizSection.appendChild(QuizButton3);
-  QuizSection.appendChild(QuizButton4);
-  quizWrapper = document.querySelector("#quizWrapper");
-  QuizButton1click = quizWrapper.querySelector("#QuizButton1");
-  QuizButton2click = quizWrapper.querySelector("#QuizButton2");
-  QuizButton3click = quizWrapper.querySelector("#QuizButton3");
-  QuizButton4click = quizWrapper.querySelector("#QuizButton4");
+
+    QuizSection.appendChild(h1El);
+    QuizSection.appendChild(p);
+    QuizSection.appendChild(enterInitials);
+    QuizSection.appendChild(submitButton);
+   
+  }
+
 
 //JAVASCRIPT VARIABLES
   
@@ -164,6 +232,11 @@ function LoadQuiz(event,answer) {
     {
         alert("correct")
         QuestionAsked++;
+
+      //  <audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoplay="false" ></audio>
+       // <a onclick="playSound();"> Play</a>
+       // var sound = document.getElementById("audio");
+       // sound.play();
      }
     else 
     {
