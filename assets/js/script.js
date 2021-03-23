@@ -56,7 +56,7 @@ var quizqa= {
         "3. parentheses",
         "4. square brackets"
        ],
-       a :  "3. parentheses"
+       a :  "1. quotes"
      },
      {
        q : "Arrays in JavaScript can be used to store  ____.",
@@ -106,7 +106,7 @@ startButton.addEventListener("click", function (event) {
 
 // FUNCTION  CALLS
 
-function LoadQuiz(event) {
+function LoadQuiz(event,answer) {
 
   document.getElementById("quizWrapper").innerHTML = "";
 
@@ -124,10 +124,10 @@ function LoadQuiz(event) {
   {
     p.textContent = quizqa.data[0].q;
     QuizButton1.textContent = quizqa.data[0].o[0];
-    QuizButton2.textContent =  quizqa.data[0].o[1];;
-    QuizButton3.textContent =  quizqa.data[0].o[2];;
-    QuizButton4.textContent =  quizqa.data[0].o[3];;
-    QuestionAsked++;
+    QuizButton2.textContent =  quizqa.data[0].o[1];
+    QuizButton3.textContent =  quizqa.data[0].o[2];
+    QuizButton4.textContent =  quizqa.data[0].o[3];
+    
   }
   else if(QuestionAsked = "1")
   {
@@ -159,27 +159,70 @@ function LoadQuiz(event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
     console.log(QuizButton1click.innerHTML);
-    LoadQuiz(2);
+    console.log(quizqa.data[QuestionAsked].a);
+    if(quizqa.data[QuestionAsked].a === QuizButton1click.innerHTML)
+    {
+        alert("correct")
+        QuestionAsked++;
+     }
+    else 
+    {
+        alert("Wrong!!!!!!!");
+        QuestionAsked++;
+    }
+    LoadQuiz(2,QuizButton1click.innerHTML);
   });
 
   QuizButton2click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-    console.log(QuizButton2click.innerHTML);
-    LoadQuiz(3);
+    console.log(quizqa.data[QuestionAsked].a);
+    if(quizqa.data[QuestionAsked].a === QuizButton2click.innerHTML)
+    {
+        alert("correct")
+        QuestionAsked++;
+     }
+    else 
+    {
+        alert("Wrong!!!!!!!");
+        QuestionAsked++;
+    }
+    LoadQuiz(3,QuizButton2click.innerHTML);
   });
 
   QuizButton3click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
     console.log(QuizButton3click.innerHTML);
-    LoadQuiz(4);
+    console.log(quizqa.data[QuestionAsked].a);
+    if(quizqa.data[QuestionAsked].a === QuizButton3click.innerHTML)
+    {
+        alert("correct")
+        QuestionAsked++;
+     }
+    else 
+    {
+        alert("Wrong!!!!!!!");
+        QuestionAsked++;
+    }
+    LoadQuiz(4,QuizButton2click.innerHTML);
   });
 
   QuizButton4click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
     console.log(QuizButton4click.innerHTML);
-    LoadQuiz(5);
+    console.log(quizqa.data[QuestionAsked].a);
+    if(quizqa.data[QuestionAsked].a === QuizButton4click.innerHTML)
+    {
+        alert("correct")
+        QuestionAsked++;
+     }
+    else 
+    {
+        alert("Wrong!!!!!!!");
+        QuestionAsked++;
+    }
+    LoadQuiz(5,QuizButton2click.innerHTML);
   });
 }
