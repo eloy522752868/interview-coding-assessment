@@ -90,12 +90,16 @@ var quizqa= {
        ],
        a : "3. for loops",
      }
-     ]
+     ],
+       // (A3) GAME FLAGS
+    Win: 0, // current wins
+    Loss: 0, // current loss
+     
     }
 
-
-console.log(quizqa.data[3])
-
+console.log(quizqa.data)
+console.log(quizqa.Win)
+console.log(quizqa.Loss)
 //EVENT LISTENERS
 
 // Add listener to submit element
@@ -107,6 +111,24 @@ startButton.addEventListener("click", function (event) {
 });
 
 // FUNCTION  CALLS
+
+function answerValidate(answerResult)
+{
+   // document.getElementById("container2").innerHTML = "";
+    var body = document.body;
+    var h3 = document.createElement("h3");
+    var QuizAnswerSection = document.createElement("section");
+    var p = document.createElement("p");
+    h3.textContent = "Answer is:";
+    // Create Quiz Question
+    p.textContent = answerResult;
+
+    main.appendChild(QuizAnswerSection);
+    QuizAnswerSection.setAttribute("class", "container2");
+    QuizAnswerSection.setAttribute("id", "answerValidate");
+    QuizAnswerSection.appendChild(h3);
+    QuizAnswerSection.appendChild(p);
+}
 
 function LoadQuiz(event,answer) {
 
@@ -204,7 +226,7 @@ function LoadQuiz(event,answer) {
     h1El.textContent = "All done!";
     SubmitButton = quizWrapper.querySelector("#submitButton")
     // Create Quiz Question
-    p.textContent = "Your final score is 0.";
+    p.textContent = "Your final score is " + quizqa.Win + "Correct &  " + quizqa.Loss + " Wrong";
     submitButton.textContent  = "Submit";
   
   submitButton.textContent = "Submit Score";
@@ -215,6 +237,7 @@ function LoadQuiz(event,answer) {
     QuizSection.appendChild(p);
     QuizSection.appendChild(enterInitials);
     QuizSection.appendChild(submitButton);
+
    
   }
 
@@ -230,8 +253,10 @@ function LoadQuiz(event,answer) {
     console.log(quizqa.data[QuestionAsked].a);
     if(quizqa.data[QuestionAsked].a === QuizButton1click.innerHTML)
     {
-        alert("correct")
+        answerValidate("correct")
         QuestionAsked++;
+        quizqa.Win++;
+        
 
       //  <audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoplay="false" ></audio>
        // <a onclick="playSound();"> Play</a>
@@ -240,8 +265,11 @@ function LoadQuiz(event,answer) {
      }
     else 
     {
-        alert("Wrong!!!!!!!");
+        answerValidate("Wrong")
         QuestionAsked++;
+        quizqa.Loss++;
+       
+
     }
     LoadQuiz(2,QuizButton1click.innerHTML);
   });
@@ -252,13 +280,15 @@ function LoadQuiz(event,answer) {
     console.log(quizqa.data[QuestionAsked].a);
     if(quizqa.data[QuestionAsked].a === QuizButton2click.innerHTML)
     {
-        alert("correct")
+        answerValidate("correct");
         QuestionAsked++;
+        quizqa.Win++;
      }
     else 
     {
-        alert("Wrong!!!!!!!");
+        answerValidate("Wrong")
         QuestionAsked++;
+        quizqa.Loss++;
     }
     LoadQuiz(3,QuizButton2click.innerHTML);
   });
@@ -270,13 +300,15 @@ function LoadQuiz(event,answer) {
     console.log(quizqa.data[QuestionAsked].a);
     if(quizqa.data[QuestionAsked].a === QuizButton3click.innerHTML)
     {
-        alert("correct")
+        answerValidate("correct");
         QuestionAsked++;
+        quizqa.Win++;
      }
     else 
     {
-        alert("Wrong!!!!!!!");
+        answerValidate("Wrong")
         QuestionAsked++;
+        quizqa.Loss++;
     }
     LoadQuiz(4,QuizButton2click.innerHTML);
   });
@@ -288,13 +320,15 @@ function LoadQuiz(event,answer) {
     console.log(quizqa.data[QuestionAsked].a);
     if(quizqa.data[QuestionAsked].a === QuizButton4click.innerHTML)
     {
-        alert("correct")
+        answerValidate("correct");
         QuestionAsked++;
+        quizqa.Win++;
      }
     else 
     {
-        alert("Wrong!!!!!!!");
+        answerValidate("Wrong")
         QuestionAsked++;
+        quizqa.Loss++;
     }
     LoadQuiz(5,QuizButton2click.innerHTML);
   });
