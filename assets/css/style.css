@@ -170,6 +170,10 @@
 	float: right;
     }
 
+ #view-highscores
+{
+  cursor: pointer;
+}
 
     
 @media (max-width: 690px) {
@@ -189,4 +193,5 @@
     font-size: 0.8rem;
   }
 }
-  
+
+
