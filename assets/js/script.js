@@ -5,6 +5,9 @@ var h1El = document.createElement("h2");
 var main = document.createElement("main");
 var QuizSection = document.createElement("section");
 var p = document.createElement("p");
+var timeInterval  = null;
+
+
 
 var startButton = document.createElement("BUTTON");
 var timerEl = document.getElementById('countdown');
@@ -16,6 +19,7 @@ var timeLeft = 75;
 h1El.textContent = "Coding Quiz Challenge";
 // Create Quiz Question
 startButton.textContent = "Start Quiz";
+p.textContent = "Below are Instruction how to play";
 body.appendChild(main);
 
 main.appendChild(QuizSection);
@@ -119,18 +123,39 @@ startButton.addEventListener("click", function (event) {
 function highScoresStoredlist()
  {
   var  ul = document.createElement("ul");
+  var storedNames = JSON.parse(localStorage.getItem("names"));
+  
+  if (highscroesArray == null|| highscroesArray.length === 0)
+   {
+    var retrievedData = localStorage.getItem("highscores");
+    if (retrievedData == null)
+    {
+     highscroesArray= [];
+   }
+   else
+    {
+      highscroesArray= JSON.parse(retrievedData);
+    }
+   }
+else
+{
+    //alert("Will loop here if data in array")
+}
+  
   ul.id = "highScoreList";
   for (var i = 0; i < highscroesArray.length; i++)
   {
+    i
     var todo = highscroesArray[i];
     var liHighScores =   document.createElement("li");
-    liHighScores.textContent = highscroesArray ;
+    liHighScores.textContent = highscroesArray[i] ;
     liHighScores.setAttribute("data-index", i);
   //  names[0] = prompt("New member name?");
-//localStorage.setItem("names", JSON.stringify(names));
-
+     localStorage.setItem("highscores", JSON.stringify(highscroesArray));
+//  localStorage.setItem("highscores", JSON.stringify(todo));
 //...
-var storedNames = JSON.parse(localStorage.getItem("names"));
+
+// JSON.parse(localStorage.getItem("names"));
     //var button = document.createElement("button");
     //button.textContent = "Complete ✔️";
     ul.appendChild(liHighScores);
@@ -191,10 +216,11 @@ var storedNames = JSON.parse(localStorage.getItem("names"));
       // Event bubbling would occur and a new window would open if we did not include the following line of code.
     
       event.stopPropagation();
-       
       highscroesArray.length = 0;
+      highscroesArray = [];
+      localStorage.removeItem("highscores")
+
       highScoresStoredlist();
-    
     });
 }
 viewHighscores.addEventListener("click", function (event) {
@@ -203,6 +229,8 @@ viewHighscores.addEventListener("click", function (event) {
   event.stopPropagation();
   highScoresStoredlist();
   highScoresStoredlist();
+  console.log(timeInterval) ;
+  clearInterval(timeInterval);
 
 });
 
@@ -242,7 +270,7 @@ function countdown() {
 
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     // As long as the `timeLeft` is greater than 1
     if (timeLeft > 1) {
       // Set the `textContent` of `timerEl` to show the remaining seconds
@@ -393,13 +421,13 @@ function LoadQuiz(event,answer) {
 
     submitButton.addEventListener("click", function (event) {
 
-      highscroesArray.push(enterInitials.value + "-" +  (quizqa.Win / 5) * 100);
-      consol.log(highscroesArray)
+      highscroesArray.push(enterInitials.value + "-" +  (quizqa.Win / 5) * 100)
       highScoresStoredlist();
+      console.log(highscroesArray);
 
     });
     
-    console.log(highscroesArray)
+
   }
 
 
@@ -417,6 +445,7 @@ function LoadQuiz(event,answer) {
         answerValidate("correct")
         QuestionAsked++;
         quizqa.Win++;
+        var pResults = document.createElement("p");
         pResults.textContent = "Answer is: " +  3;
         QuizSection.appendChild(pResults);
 
