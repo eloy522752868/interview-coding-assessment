@@ -6,8 +6,8 @@ var main = document.createElement("main");
 var QuizSection = document.createElement("section");
 var p = document.createElement("p");
 var startButton = document.createElement("BUTTON");
-
-
+var timerEl = document.getElementById('countdown');
+var timeLeft = 75;
 
 h1El.textContent = "Coding Quiz Challenge";
 // Create Quiz Question
@@ -108,6 +108,9 @@ startButton.addEventListener("click", function (event) {
   event.stopPropagation();
 
   LoadQuiz(1);
+  countdown() 
+  timeLeft = 75 ;
+  clearInterval(timeInterval);
 });
 
 // FUNCTION  CALLS
@@ -128,6 +131,47 @@ function answerValidate(answerResult)
     QuizAnswerSection.setAttribute("id", "answerValidate");
     QuizAnswerSection.appendChild(h3);
     QuizAnswerSection.appendChild(p);
+}
+
+
+function countdown() {
+
+
+  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+  var timeInterval = setInterval(function () {
+    // As long as the `timeLeft` is greater than 1
+    if (timeLeft > 1) {
+      // Set the `textContent` of `timerEl` to show the remaining seconds
+      timerEl.textContent = timeLeft + ' seconds remaining';
+      // Decrement `timeLeft` by 1
+      timeLeft--;
+    } else if (timeLeft === 1) {
+      // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+      timerEl.textContent = timeLeft + ' second remaining';
+      timeLeft--;
+    } else {
+      // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+      timerEl.textContent = '';
+      // Use `clearInterval()` to stop the timer
+      clearInterval(timeInterval);
+      // Call the `displayMessage()` function
+         document.getElementById("quizWrapper").innerHTML = "";
+
+         h1El.textContent = "Sorry Times Up";
+         // Create Quiz Question
+         p.textContent =
+           "To play agian click below";
+         startButton.textContent = "Start Quiz";
+         body.appendChild(main);
+         
+         main.appendChild(QuizSection);
+         QuizSection.setAttribute("class", "container");
+         QuizSection.setAttribute("id", "quizWrapper");
+         QuizSection.appendChild(h1El);
+         QuizSection.appendChild(p);
+         QuizSection.appendChild(startButton);
+    }
+  }, 1000);
 }
 
 function LoadQuiz(event,answer) {
@@ -218,10 +262,11 @@ function LoadQuiz(event,answer) {
     QuizButton2click = quizWrapper.querySelector("#QuizButton2");
     QuizButton3click = quizWrapper.querySelector("#QuizButton3");
     QuizButton4click = quizWrapper.querySelector("#QuizButton4");
-
+    
   }
   else
   {
+
     //document.getElementById("quizWrapper").innerHTML = "";
     h1El.textContent = "All done!";
     SubmitButton = quizWrapper.querySelector("#submitButton")
@@ -237,6 +282,7 @@ function LoadQuiz(event,answer) {
     QuizSection.appendChild(p);
     QuizSection.appendChild(enterInitials);
     QuizSection.appendChild(submitButton);
+    
 
    
   }
@@ -268,7 +314,7 @@ function LoadQuiz(event,answer) {
         answerValidate("Wrong")
         QuestionAsked++;
         quizqa.Loss++;
-       
+        timeLeft = timeLeft - 17;
 
     }
     LoadQuiz(2,QuizButton1click.innerHTML);
@@ -289,6 +335,7 @@ function LoadQuiz(event,answer) {
         answerValidate("Wrong")
         QuestionAsked++;
         quizqa.Loss++;
+        timeLeft = timeLeft - 17;
     }
     LoadQuiz(3,QuizButton2click.innerHTML);
   });
@@ -309,6 +356,7 @@ function LoadQuiz(event,answer) {
         answerValidate("Wrong")
         QuestionAsked++;
         quizqa.Loss++;
+        timeLeft = timeLeft - 17;
     }
     LoadQuiz(4,QuizButton2click.innerHTML);
   });
@@ -323,12 +371,14 @@ function LoadQuiz(event,answer) {
         answerValidate("correct");
         QuestionAsked++;
         quizqa.Win++;
+        
      }
     else 
     {
         answerValidate("Wrong")
         QuestionAsked++;
         quizqa.Loss++;
+        timeLeft = timeLeft - 17;
     }
     LoadQuiz(5,QuizButton2click.innerHTML);
   });
