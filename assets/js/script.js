@@ -5,6 +5,7 @@ var h1El = document.createElement("h2");
 var main = document.createElement("main");
 var QuizSection = document.createElement("section");
 var p = document.createElement("p");
+
 var startButton = document.createElement("BUTTON");
 var timerEl = document.getElementById('countdown');
 var viewHighscores = document.getElementById('view-highscores');
@@ -14,8 +15,6 @@ var timeLeft = 75;
 
 h1El.textContent = "Coding Quiz Challenge";
 // Create Quiz Question
-p.textContent =
-  "Try to anser the following code-rlated questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by teb seconds!";
 startButton.textContent = "Start Quiz";
 body.appendChild(main);
 
@@ -25,6 +24,7 @@ QuizSection.setAttribute("id", "quizWrapper");
 QuizSection.appendChild(h1El);
 QuizSection.appendChild(p);
 QuizSection.appendChild(startButton);
+
 
 
 
@@ -113,7 +113,7 @@ startButton.addEventListener("click", function (event) {
   LoadQuiz(1);
   countdown() 
   timeLeft = 75 ;
-  clearInterval(timeInterval);
+
 });
 
 function highScoresStoredlist()
@@ -122,17 +122,21 @@ function highScoresStoredlist()
   ul.id = "highScoreList";
   for (var i = 0; i < highscroesArray.length; i++)
   {
-    var todo = todos[i];
+    var todo = highscroesArray[i];
     var liHighScores =   document.createElement("li");
     liHighScores.textContent = highscroesArray ;
     liHighScores.setAttribute("data-index", i);
+  //  names[0] = prompt("New member name?");
+//localStorage.setItem("names", JSON.stringify(names));
+
+//...
+var storedNames = JSON.parse(localStorage.getItem("names"));
     //var button = document.createElement("button");
     //button.textContent = "Complete ✔️";
     ul.appendChild(liHighScores);
   }
     //liHighScores.appendChild(button);
     
-  var goBackHome = document.createElement('button');
      var goBackHome = document.createElement('button');
      goBackHome.id = "goBackHome";
      goBackHome.innerHTML ="Go Back";
@@ -146,8 +150,7 @@ function highScoresStoredlist()
 
      h1El.textContent = "Highscores";
      // Create Quiz Question
-     p.textContent =
-       "1. eg - 20";
+   //  p.textContent ="1. eg - 20";
      startButton.textContent = "Start Quiz";
      body.appendChild(main);
      
@@ -155,16 +158,51 @@ function highScoresStoredlist()
      QuizSection.setAttribute("class", "container");
      QuizSection.setAttribute("id", "quizWrapper");
      QuizSection.appendChild(h1El);
-     QuizSection.appendChild(p);
+     goBackHome.id = "go-back-home";
+     clearHighscores.id = "clear-high-score";
+    // QuizSection.appendChild(p);
      QuizSection.appendChild(ul);
      QuizSection.appendChild(goBackHome);
      QuizSection.appendChild(clearHighscores);
+     QuizSection.appendChild(clearHighscores); 
+     console.log(quizWrapper.querySelector("#quizWrapper"));
+     goBackHomeclick = quizWrapper.querySelector("#go-back-home");
+     clearHighscoresclick = quizWrapper.querySelector("#clear-high-score");
 
+     goBackHomeclick.addEventListener("click", function (event) {
+      // Event bubbling would occur and a new window would open if we did not include the following line of code.
+      document.getElementById("quizWrapper").innerHTML = "";
+      h1El.textContent = "Coding Quiz Challenge";
+      // Create Quiz Question
+      startButton.textContent = "Start Quiz";
+      body.appendChild(main);
+      
+      main.appendChild(QuizSection);
+      QuizSection.setAttribute("class", "container");
+      QuizSection.setAttribute("id", "quizWrapper");
+      QuizSection.appendChild(h1El);
+      QuizSection.appendChild(p);
+      QuizSection.appendChild(startButton);
+      
+    
+    });
+
+    clearHighscoresclick.addEventListener("click", function (event) {
+      // Event bubbling would occur and a new window would open if we did not include the following line of code.
+    
+      event.stopPropagation();
+       
+      highscroesArray.length = 0;
+      highScoresStoredlist();
+    
+    });
 }
 viewHighscores.addEventListener("click", function (event) {
   // Event bubbling would occur and a new window would open if we did not include the following line of code.
 
   event.stopPropagation();
+  highScoresStoredlist();
+  highScoresStoredlist();
 
 });
 
@@ -173,26 +211,6 @@ viewHighscores.addEventListener("click", function (event) {
 
 
 // The following function renders items in a todo list as <li> elements
-function renderTodos() {
-  // Clear todoList element and update todoCountSpan
-  todoList.innerHTML = "";
-  todoCountSpan.textContent = todos.length;
-
-  // Render a new li for each todo
-  for (var i = 0; i < todos.length; i++) {
-    var todo = todos[i];
-
-    var li = document.createElement("li");
-    li.textContent = todo;
-    li.setAttribute("data-index", i);
-
-    var button = document.createElement("button");
-    button.textContent = "Complete ✔️";
-
-    li.appendChild(button);
-    todoList.appendChild(li);
-  }
-}
 
 function answerValidate(answerResult)
 {
@@ -205,11 +223,18 @@ function answerValidate(answerResult)
     // Create Quiz Question
     p.textContent = answerResult;
 
-    main.appendChild(QuizAnswerSection);
+    main.appendChild(QuizSection);
     QuizAnswerSection.setAttribute("class", "container2");
     QuizAnswerSection.setAttribute("id", "answerValidate");
     QuizAnswerSection.appendChild(h3);
     QuizAnswerSection.appendChild(p);
+    var Aa = document.getElementById('quizWrapper');
+console.log(Aa);
+Aa.innerHTML += 'Hello, I am Arun';
+    var pResults = document.createElement("p");
+  pResults.textContent =
+  "Answer is: " +  answerResult;
+   Aa.appendChild(pResults);
 }
 
 
@@ -263,6 +288,8 @@ function LoadQuiz(event,answer) {
   var QuizButton4 = document.createElement("BUTTON");
   var submitButton = document.createElement("BUTTON");
   var enterInitials = document.createElement("input");
+  var pResults = document.createElement("p");
+
   submitButton.id = "submitButton";
   enterInitials.id = "enterInitials";
   enterInitials.placeholder = "Enter initials";
@@ -283,7 +310,6 @@ function LoadQuiz(event,answer) {
     QuizButton2.textContent =  quizqa.data[0].o[1];
     QuizButton3.textContent =  quizqa.data[0].o[2];
     QuizButton4.textContent =  quizqa.data[0].o[3];
-    
   }
   else if(QuestionAsked === 1)
   {
@@ -330,18 +356,21 @@ function LoadQuiz(event,answer) {
 
   if (QuestionAsked < 5) 
   {
+
+
     body.appendChild(QuizSection);
     QuizSection.appendChild(p);
     QuizSection.appendChild(QuizButton1);
     QuizSection.appendChild(QuizButton2);
     QuizSection.appendChild(QuizButton3);
-    QuizSection.appendChild(QuizButton4);
+    QuizSection.appendChild(QuizButton4);  
     quizWrapper = document.querySelector("#quizWrapper");
     QuizButton1click = quizWrapper.querySelector("#QuizButton1");
     QuizButton2click = quizWrapper.querySelector("#QuizButton2");
     QuizButton3click = quizWrapper.querySelector("#QuizButton3");
     QuizButton4click = quizWrapper.querySelector("#QuizButton4");
-    
+
+ 
   }
   else
   {
@@ -361,13 +390,12 @@ function LoadQuiz(event,answer) {
     QuizSection.appendChild(p);
     QuizSection.appendChild(enterInitials);
     QuizSection.appendChild(submitButton);
-    
+
     submitButton.addEventListener("click", function (event) {
 
       highscroesArray.push(enterInitials.value + "-" +  (quizqa.Win / 5) * 100);
- 
-
-      alert("SSS")
+      consol.log(highscroesArray)
+      highScoresStoredlist();
 
     });
     
@@ -389,7 +417,8 @@ function LoadQuiz(event,answer) {
         answerValidate("correct")
         QuestionAsked++;
         quizqa.Win++;
-        
+        pResults.textContent = "Answer is: " +  3;
+        QuizSection.appendChild(pResults);
 
       //  <audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoplay="false" ></audio>
        // <a onclick="playSound();"> Play</a>
