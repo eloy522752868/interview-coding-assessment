@@ -7,6 +7,9 @@ var QuizSection = document.createElement("section");
 var p = document.createElement("p");
 var startButton = document.createElement("BUTTON");
 var timerEl = document.getElementById('countdown');
+var viewHighscores = document.getElementById('view-highscores');
+var highscroesArray = [];
+console.log(viewHighscores);
 var timeLeft = 75;
 
 h1El.textContent = "Coding Quiz Challenge";
@@ -113,7 +116,83 @@ startButton.addEventListener("click", function (event) {
   clearInterval(timeInterval);
 });
 
+function highScoresStoredlist()
+ {
+  var  ul = document.createElement("ul");
+  ul.id = "highScoreList";
+  for (var i = 0; i < highscroesArray.length; i++)
+  {
+    var todo = todos[i];
+    var liHighScores =   document.createElement("li");
+    liHighScores.textContent = highscroesArray ;
+    liHighScores.setAttribute("data-index", i);
+    //var button = document.createElement("button");
+    //button.textContent = "Complete ✔️";
+    ul.appendChild(liHighScores);
+  }
+    //liHighScores.appendChild(button);
+    
+  var goBackHome = document.createElement('button');
+     var goBackHome = document.createElement('button');
+     goBackHome.id = "goBackHome";
+     goBackHome.innerHTML ="Go Back";
+     goBackHome.style.background = "red";
+     var clearHighscores = document.createElement('button');
+     clearHighscores.id = "clearHighscores";
+     clearHighscores.innerHTML ="Clear Highscores";
+     clearHighscores.style.background = "blue";
+     
+     document.getElementById("quizWrapper").innerHTML = "";
+
+     h1El.textContent = "Highscores";
+     // Create Quiz Question
+     p.textContent =
+       "1. eg - 20";
+     startButton.textContent = "Start Quiz";
+     body.appendChild(main);
+     
+     main.appendChild(QuizSection);
+     QuizSection.setAttribute("class", "container");
+     QuizSection.setAttribute("id", "quizWrapper");
+     QuizSection.appendChild(h1El);
+     QuizSection.appendChild(p);
+     QuizSection.appendChild(ul);
+     QuizSection.appendChild(goBackHome);
+     QuizSection.appendChild(clearHighscores);
+
+}
+viewHighscores.addEventListener("click", function (event) {
+  // Event bubbling would occur and a new window would open if we did not include the following line of code.
+
+  event.stopPropagation();
+
+});
+
+
 // FUNCTION  CALLS
+
+
+// The following function renders items in a todo list as <li> elements
+function renderTodos() {
+  // Clear todoList element and update todoCountSpan
+  todoList.innerHTML = "";
+  todoCountSpan.textContent = todos.length;
+
+  // Render a new li for each todo
+  for (var i = 0; i < todos.length; i++) {
+    var todo = todos[i];
+
+    var li = document.createElement("li");
+    li.textContent = todo;
+    li.setAttribute("data-index", i);
+
+    var button = document.createElement("button");
+    button.textContent = "Complete ✔️";
+
+    li.appendChild(button);
+    todoList.appendChild(li);
+  }
+}
 
 function answerValidate(answerResult)
 {
@@ -269,22 +348,30 @@ function LoadQuiz(event,answer) {
 
     //document.getElementById("quizWrapper").innerHTML = "";
     h1El.textContent = "All done!";
-    SubmitButton = quizWrapper.querySelector("#submitButton")
+    //SubmitButton = quizWrapper.querySelector("#submitButton")
     // Create Quiz Question
-    p.textContent = "Your final score is " + quizqa.Win + "Correct &  " + quizqa.Loss + " Wrong";
+    p.textContent = "Your final score is: " + (quizqa.Win / 5) * 100;
     submitButton.textContent  = "Submit";
   
-  submitButton.textContent = "Submit Score";
-  enterInitials.textContent = "Initials";
-  body.appendChild(QuizSection);
+    submitButton.textContent = "Submit Score";
+    enterInitials.textContent = "Initials";
+    body.appendChild(QuizSection);
 
     QuizSection.appendChild(h1El);
     QuizSection.appendChild(p);
     QuizSection.appendChild(enterInitials);
     QuizSection.appendChild(submitButton);
     
+    submitButton.addEventListener("click", function (event) {
 
-   
+      highscroesArray.push(enterInitials.value + "-" +  (quizqa.Win / 5) * 100);
+ 
+
+      alert("SSS")
+
+    });
+    
+    console.log(highscroesArray)
   }
 
 
@@ -314,7 +401,7 @@ function LoadQuiz(event,answer) {
         answerValidate("Wrong")
         QuestionAsked++;
         quizqa.Loss++;
-        timeLeft = timeLeft - 17;
+        timeLeft = timeLeft - 15;
 
     }
     LoadQuiz(2,QuizButton1click.innerHTML);
@@ -335,7 +422,7 @@ function LoadQuiz(event,answer) {
         answerValidate("Wrong")
         QuestionAsked++;
         quizqa.Loss++;
-        timeLeft = timeLeft - 17;
+        timeLeft = timeLeft - 15;
     }
     LoadQuiz(3,QuizButton2click.innerHTML);
   });
@@ -356,7 +443,7 @@ function LoadQuiz(event,answer) {
         answerValidate("Wrong")
         QuestionAsked++;
         quizqa.Loss++;
-        timeLeft = timeLeft - 17;
+        timeLeft = timeLeft - 15;
     }
     LoadQuiz(4,QuizButton2click.innerHTML);
   });
@@ -378,7 +465,7 @@ function LoadQuiz(event,answer) {
         answerValidate("Wrong")
         QuestionAsked++;
         quizqa.Loss++;
-        timeLeft = timeLeft - 17;
+        timeLeft = timeLeft - 15;
     }
     LoadQuiz(5,QuizButton2click.innerHTML);
   });
