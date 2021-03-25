@@ -5,12 +5,11 @@ var h1El = document.createElement("h2");
 var main = document.createElement("main");
 var QuizSection = document.createElement("section");
 var p = document.createElement("p");
-var timeInterval = null;
 var startButton = document.createElement("BUTTON");
 var timerEl = document.getElementById("countdown");
 var viewHighscores = document.getElementById("view-highscores");
 var highscroesArray = [];
-console.log(viewHighscores);
+var timeInterval = null;
 var timeLeft = 75;
 
 h1El.textContent = "Coding Quiz Challenge";
@@ -38,6 +37,7 @@ var QuizButton2click;
 var QuizButton3click;
 var QuizButton4click;
 var QuestionAsked = 0;
+
 
 var quizqa = {
   // (A) PROPERTIES
@@ -102,7 +102,9 @@ startButton.addEventListener("click", function (event) {
   LoadQuiz(1);
   countdown();
   timeLeft = 75;
-  QuestionAsked = 1;
+  QuestionAsked = 0;
+  quizqa.Win = 0;
+  quizqa.Loss = 0;
 });
 
 function highScoresStoredlist() {
@@ -169,7 +171,9 @@ function highScoresStoredlist() {
   console.log(quizWrapper.querySelector("#quizWrapper"));
   goBackHomeclick = quizWrapper.querySelector("#go-back-home");
   clearHighscoresclick = quizWrapper.querySelector("#clear-high-score");
-
+  QuestionAsked = 0;
+  quizqa.Win = 0;
+  quizqa.Loss = 0;
   goBackHomeclick.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     document.getElementById("quizWrapper").innerHTML = "";
@@ -187,13 +191,18 @@ function highScoresStoredlist() {
     QuizSection.appendChild(p);
     QuizSection.appendChild(startButton);
     clearInterval(intervalId);
+    QuestionAsked = 0;
+    quizqa.Win = 0;
+    quizqa.Loss = 0;
     startButton.addEventListener("click", function (event) {
       // Event bubbling would occur and a new window would open if we did not include the following line of code.
-
+      
       LoadQuiz(1);
       countdown();
       timeLeft = 75;
-      QuestionAsked = 1;
+      QuestionAsked = 0;
+      quizqa.Win = 0;
+      quizqa.Loss = 0;
     });
   });
 
@@ -297,7 +306,7 @@ function LoadQuiz(event, answer) {
 
   submitButton.id = "submitButton";
   enterInitials.id = "enterInitials";
-  enterInitials.placeholder = "Enter initials";
+  enterInitials.placeholder = "Enter Initials";
 
   QuizButton1.id = "QuizButton1";
   QuizButton2.id = "QuizButton2";
@@ -352,10 +361,7 @@ function LoadQuiz(event, answer) {
     QuizButton3click = quizWrapper.querySelector("#QuizButton3");
     QuizButton4click = quizWrapper.querySelector("#QuizButton4");
   } else {
-    //document.getElementById("quizWrapper").innerHTML = "";
     h1El.textContent = "All done!";
-    //SubmitButton = quizWrapper.querySelector("#submitButton")
-    // Create Quiz Question
     p.textContent = "Your final score is: " + (quizqa.Win / 5) * 100;
     submitButton.textContent = "Submit";
 
@@ -367,11 +373,12 @@ function LoadQuiz(event, answer) {
     QuizSection.appendChild(p);
     QuizSection.appendChild(enterInitials);
     QuizSection.appendChild(submitButton);
-
+    clearInterval(timeInterval);
     submitButton.addEventListener("click", function (event) {
       highscroesArray.push(enterInitials.value + "-" + (quizqa.Win / 5) * 100);
       highScoresStoredlist();
       console.log(highscroesArray);
+      clearInterval(timeInterval);
     });
   }
 
