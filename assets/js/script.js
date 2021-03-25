@@ -16,7 +16,7 @@ h1El.textContent = "Coding Quiz Challenge";
 
 startButton.textContent = "Start Quiz";
 p.textContent =
-  "Try to answer the following code-related quations withing the time limit. Keep in mind the incorrect answers will impact your counttime by 11 secounds.";
+  "Try to answer the following code-related questions withing the time limit. Keep in mind the incorrect answers will impact your count time by 11 secounds.";
 body.appendChild(main);
 
 main.appendChild(QuizSection);
@@ -25,9 +25,9 @@ QuizSection.setAttribute("id", "quizWrapper");
 QuizSection.appendChild(h1El);
 QuizSection.appendChild(p);
 QuizSection.appendChild(startButton);
-//This varaibles will start the code and stat intial tags and element for the  
-//state game. Started an array that has the questions, options and answers. Also win loss. A completly 
-//generated the code from javascript and used the section quizWrapper as much as i could. Still some bugs on showing the click when correct or not but. Will try a pop up.
+//This varaibles will start the code and start intial tags and element for the  
+//to start game. Started an array that has the questions, options  answers and win loss. A complitly 
+//generated code from javascript and used the section quizWrapper as much as i could. Still some bugs but got as best I code. I added alert to show correct or not do issues show on section.
 //JAVASCRIPT VARIABLES
 
 var QuizButton1click;
@@ -39,10 +39,9 @@ var QuizButton4click;
 var QuestionAsked = 0;
 
 
+
 var quizqa = {
-  // (A) PROPERTIES
-  // (A1) QUESTIONS & ANSWERS
-  // Q = QUESTION, O = OPTIONS, A = CORRECT ANSWER
+
   data: [
     {
       q: "Commonly used data types DO NOT include?",
@@ -87,26 +86,24 @@ var quizqa = {
       a: "4. console.log",
     },
   ],
-  // (A3) GAME FLAGS
+
   Win: 0, // current wins
   Loss: 0, // current loss
 };
 
 //EVENT LISTENERS
 
-// Add listener to submit element
-startButton.addEventListener("click", function (event) {
-  // Event bubbling would occur and a new window would open if we did not include the following line of code.
+// Click button starts game questions and timer. Had to rest to variable to 0 to correct issues with some of firing incorrectly.
+  startButton.addEventListener("click", function (event) {
   event.stopPropagation();
-
-  LoadQuiz(1);
-  countdown();
-  timeLeft = 75;
-  QuestionAsked = 0;
-  quizqa.Win = 0;
-  quizqa.Loss = 0;
+    LoadQuiz(1);
+    countdown();
+    timeLeft = 75;
+    QuestionAsked = 0;
+    quizqa.Win = 0;
+    quizqa.Loss = 0;
 });
-
+// Click generate stores of array of highscore and localstorage. rest to variable to 0 to correct issues with some of firing incorrectly.
 function highScoresStoredlist() {
   var ul = document.createElement("ul");
   var storedNames = JSON.parse(localStorage.getItem("names"));
@@ -114,13 +111,15 @@ function highScoresStoredlist() {
     var retrievedData = localStorage.getItem("highscores");
     if (retrievedData == null) {
       highscroesArray = [];
-    } else {
+    } else 
+    {
       highscroesArray = JSON.parse(retrievedData);
     }
-  } else {
+  } 
+  else 
+  {
     //alert("Will loop here if data in array")
   }
-
   ul.id = "highScoreList";
   for (var i = 0; i < highscroesArray.length; i++) {
     i;
@@ -128,52 +127,38 @@ function highScoresStoredlist() {
     var liHighScores = document.createElement("li");
     liHighScores.textContent = highscroesArray[i];
     liHighScores.setAttribute("data-index", i);
-    //  names[0] = prompt("New member name?");
     localStorage.setItem("highscores", JSON.stringify(highscroesArray));
-    //  localStorage.setItem("highscores", JSON.stringify(todo));
-    //...
-
-    // JSON.parse(localStorage.getItem("names"));
-    //var button = document.createElement("button");
-    //button.textContent = "Complete ✔️";
     ul.appendChild(liHighScores);
   }
-  //liHighScores.appendChild(button);
-
+ 
   var goBackHome = document.createElement("button");
+  var clearHighscores = document.createElement("button");
   goBackHome.id = "goBackHome";
   goBackHome.innerHTML = "Go Back";
   goBackHome.style.background = "red";
-  var clearHighscores = document.createElement("button");
   clearHighscores.id = "clearHighscores";
   clearHighscores.innerHTML = "Clear Highscores";
   clearHighscores.style.background = "blue";
-
   document.getElementById("quizWrapper").innerHTML = "";
-
   h1El.textContent = "Highscores";
-  // Create Quiz Question
-  //  p.textContent ="1. eg - 20";
   startButton.textContent = "Start Quiz";
   body.appendChild(main);
-
   main.appendChild(QuizSection);
   QuizSection.setAttribute("class", "container");
   QuizSection.setAttribute("id", "quizWrapper");
   QuizSection.appendChild(h1El);
   goBackHome.id = "go-back-home";
   clearHighscores.id = "clear-high-score";
-  // QuizSection.appendChild(p);
   QuizSection.appendChild(ul);
   QuizSection.appendChild(goBackHome);
   QuizSection.appendChild(clearHighscores);
   QuizSection.appendChild(clearHighscores);
-  console.log(quizWrapper.querySelector("#quizWrapper"));
   goBackHomeclick = quizWrapper.querySelector("#go-back-home");
   clearHighscoresclick = quizWrapper.querySelector("#clear-high-score");
   QuestionAsked = 0;
   quizqa.Win = 0;
   quizqa.Loss = 0;
+  //go to main screen. Want to make this more steam line but ran out of time to get working correctly cleaner.
   goBackHomeclick.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     document.getElementById("quizWrapper").innerHTML = "";
@@ -181,7 +166,7 @@ function highScoresStoredlist() {
     // Create Quiz Question
     startButton.textContent = "Start Quiz";
     p.textContent =
-      "Try to answer the following code-related quations withing the time limit. Keep in mind the incorrect answers will impact your counttime by 15 secounds.";
+      "Try to answer the following code-related questions withing the time limit. Keep in mind the incorrect answers will impact your count time by 11 secounds.";
     body.appendChild(main);
 
     main.appendChild(QuizSection);
@@ -194,6 +179,8 @@ function highScoresStoredlist() {
     QuestionAsked = 0;
     quizqa.Win = 0;
     quizqa.Loss = 0;
+    
+  //Strigger the came to start. Want to make this more stream line but ran out of time to get working correctly cleaner.
     startButton.addEventListener("click", function (event) {
       // Event bubbling would occur and a new window would open if we did not include the following line of code.
       
@@ -206,9 +193,8 @@ function highScoresStoredlist() {
     });
   });
 
+  //Cleans Array and local storage. Want to make this more stream line but ran out of time to get working correctly cleaner.
   clearHighscoresclick.addEventListener("click", function (event) {
-    // Event bubbling would occur and a new window would open if we did not include the following line of code.
-
     event.stopPropagation();
     highscroesArray.length = 0;
     highscroesArray = [];
@@ -217,6 +203,8 @@ function highScoresStoredlist() {
     highScoresStoredlist();
   });
 }
+
+  //show score screen. Want to make this more stream line but ran out of time to get working correctly cleaner.
 viewHighscores.addEventListener("click", function (event) {
   // Event bubbling would occur and a new window would open if we did not include the following line of code.
 
@@ -228,11 +216,13 @@ viewHighscores.addEventListener("click", function (event) {
 
 // FUNCTION  CALLS
 
-// The following function renders items in a todo list as <li> elements
+//Want to make this more stream line but ran out of time to get working correctly cleaner.
 
 function answerValidate(answerResult) {
 
-  ///Add iss getting this to work. But to be created and meet the requiemnts I added alert box and it works to show the
+  ///validates answer shows an alert. Want to show as more as requested but this meets the requirements. I added alert box and it works to show correct and wrong.
+// left what i was working on for proof see what I can maybe correct after grade submitted.
+
 
   // document.getElementById("container2").innerHTML = "";
   //var body = document.body;
@@ -256,6 +246,7 @@ function answerValidate(answerResult) {
   //Aa.appendChild(pResults);
 }
 
+//Timer for game
 function countdown() {
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   timeInterval = setInterval(function () {
@@ -279,7 +270,7 @@ function countdown() {
 
       h1El.textContent = "Sorry Times Up";
       // Create Quiz Question
-      p.textContent = "To play agian click below";
+      p.textContent = "To play again click below";
       startButton.textContent = "Start Quiz";
       body.appendChild(main);
 
@@ -292,7 +283,7 @@ function countdown() {
     }
   }, 1000);
 }
-
+//question loop
 function LoadQuiz(event, answer) {
   document.getElementById("quizWrapper").innerHTML = "";
 
@@ -333,14 +324,12 @@ function LoadQuiz(event, answer) {
     QuizButton3.textContent = quizqa.data[2].o[2];
     QuizButton4.textContent = quizqa.data[2].o[3];
   } else if (QuestionAsked === 3) {
-    console.log(quizqa.data[QuestionAsked]);
     p.textContent = quizqa.data[3].q;
     QuizButton1.textContent = quizqa.data[3].o[0];
     QuizButton2.textContent = quizqa.data[3].o[1];
     QuizButton3.textContent = quizqa.data[3].o[2];
     QuizButton4.textContent = quizqa.data[3].o[3];
   } else if (QuestionAsked === 4) {
-    console.log(quizqa.data[QuestionAsked]);
     p.textContent = quizqa.data[4].q;
     QuizButton1.textContent = quizqa.data[4].o[0];
     QuizButton2.textContent = quizqa.data[4].o[1];
@@ -377,7 +366,6 @@ function LoadQuiz(event, answer) {
     submitButton.addEventListener("click", function (event) {
       highscroesArray.push(enterInitials.value + "-" + (quizqa.Win / 5) * 100);
       highScoresStoredlist();
-      console.log(highscroesArray);
       clearInterval(timeInterval);
     });
   }
@@ -385,12 +373,9 @@ function LoadQuiz(event, answer) {
   //JAVASCRIPT VARIABLES
 
   //EVENT LISTENERS
-
+//events for the diffrent part of the game requested. Would like add more comments but ran out of time. Will add more after grade.
   QuizButton1click.addEventListener("click", function (event) {
-    // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-    console.log(QuizButton1click.innerHTML);
-    console.log(quizqa.data[QuestionAsked].a);
     if (quizqa.data[QuestionAsked].a === QuizButton1click.innerHTML) {
       answerValidate("correct");
       QuestionAsked++;
@@ -398,7 +383,7 @@ function LoadQuiz(event, answer) {
       var pResults = document.createElement("p");
       pResults.textContent = "Answer is: " + 3;
       QuizSection.appendChild(pResults);
-
+      // was playing with the idea add sound but ran out of time to add. was. Was going to be fun to add.
       //  <audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoplay="false" ></audio>
       // <a onclick="playSound();"> Play</a>
       // var sound = document.getElementById("audio");
@@ -415,7 +400,6 @@ function LoadQuiz(event, answer) {
   QuizButton2click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-    console.log(quizqa.data[QuestionAsked].a);
     if (quizqa.data[QuestionAsked].a === QuizButton2click.innerHTML) {
       answerValidate("correct");
       QuestionAsked++;
@@ -432,8 +416,6 @@ function LoadQuiz(event, answer) {
   QuizButton3click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-    console.log(QuizButton3click.innerHTML);
-    console.log(quizqa.data[QuestionAsked].a);
     if (quizqa.data[QuestionAsked].a === QuizButton3click.innerHTML) {
       answerValidate("correct");
       QuestionAsked++;
@@ -450,8 +432,6 @@ function LoadQuiz(event, answer) {
   QuizButton4click.addEventListener("click", function (event) {
     // Event bubbling would occur and a new window would open if we did not include the following line of code.
     event.stopPropagation();
-    console.log(QuizButton4click.innerHTML);
-    console.log(quizqa.data[QuestionAsked].a);
     if (quizqa.data[QuestionAsked].a === QuizButton4click.innerHTML) {
       answerValidate("correct");
       QuestionAsked++;

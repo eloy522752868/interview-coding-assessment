@@ -1,92 +1,14 @@
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
-/* Document
-   ========================================================================== */
+/* Elements Selectors */
+/* Note:Added header,nav to use these elements instead of classes as much as possible.
+I used variable for colors. 03/17/21 egon*/
 
-/**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- */
-
- 
-  /* Sections
-     ========================================================================== */
-  
-  /**
-   * Remove the margin in all browsers.
-   */
-  
- 
-  /**
-   * Render the `main` element consistently in IE.
-   */
-  
-
-  
-  /**
-   * Correct the font size and margin on `h1` elements within `section` and
-   * `article` contexts in Chrome, Firefox, and Safari.
-   */
-  
- 
-  
-  /* Grouping content
-     ========================================================================== */
-  
-  /**
-   * 1. Add the correct box sizing in Firefox.
-   * 2. Show the overflow in Edge and IE.
-   */
-  
-
-  
-  /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
-  
-
-  
-  /* Text-level semantics
-     ========================================================================== */
-  
-  /**
-   * Remove the gray background on active links in IE 10.
-   */
-  
-
-  /**
-   * 1. Remove the bottom border in Chrome 57-
-   * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
-   */
-  
-
-  /**
-   * Add the correct font weight in Chrome, Edge, and Safari.
-   */
-  
-
-  
-  /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
-  
-   /* Class Section */
-
-   #enterInitials
-   {
-    width: 200px;
-    height: 40px;
-    font-size: 20px;
-   }
    button
    {
     border: none;
     background-color: hsl(360, 91%, 36%);
     border-radius: 25px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
-      0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px   0px;
     color: hsl(0, 0%, 100%);
     display: inline-block;
     font-size: 22px;
@@ -97,7 +19,7 @@
     cursor: pointer;
    }
 
-   button:hover{
+  button:hover{
     background-color: #fff;
     border: 1px solid #1E88E5;
     color: #1E88E5;
@@ -105,7 +27,6 @@
 
   header
    {
-
     padding: 30px;
     padding-top: 10px;
     color: hsl(206, 17%, 28%);
@@ -116,43 +37,12 @@
     margin: 2em;
     background-color: lightgray;
   }
-  
-  .container {
-    display: block;
-    margin: 50px auto;
-    text-align: center;
-    font-size: 30px;
-    transition: 0.3s;
-    width: 80vw;
 
-    padding-top: 20px;
-
-
-    background-color: whitesmoke;
-    border-radius: 30px;
-    text-align: center;
-    font-size: 30px;
-    border-width: 7px;
-    border-style: solid;
-    border-color: black;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
-    color: hsl(206, 17%, 28%);
-  
-  }
-  
-  .carouselbox {
-    display:block;
-    margin: auto;
-    width: 300px;
-    height: 200px;
-    cursor: pointer;
-    padding-bottom: 40px;
-  }
-  
   img {
     margin: 0 auto;
   }
   
+  /* Class Section */
   .prev {
     text-align: center;
     width: 100px;
@@ -168,14 +58,44 @@
   .wrapper {
     padding-bottom: 30px;
   }
-  
+  /* Highscror link */
    .alignleft {
 	float: left;
     }
+
+    /* timer score*/
     .alignright {
 	float: right;
     }
-
+      
+  .container {
+    display: block;
+    margin: 50px auto;
+    text-align: center;
+    font-size: 30px;
+    transition: 0.3s;
+    width: 80vw;
+    padding-top: 20px;
+    background-color: whitesmoke;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 30px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: black;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+    color: hsl(206, 17%, 28%);
+  
+  }
+  
+/* Id Section */
+/* Need a pointer for my high score*/
+#enterInitials
+{
+ width: 200px;
+ height: 40px;
+ font-size: 20px;
+}
  #view-highscores
 {
   cursor: pointer;
